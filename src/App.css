@@ -1,38 +1,89 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
   }
+
+.page {
+    background-color: #F7F7FF;
+    height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.outside {
+    display: flex;
+    justify-content: center;
+    background-color: #F7F7FF;
+}
+ .container-for-items {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     width: 50%;
+     background-color: #EBF2FA;
+ }
+
+ .single-item {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 5px; 
+    width: 555px;
+    padding: 10px;
+    background-color: white;
+    color: #050609;
 }
 
-.App-link {
-  color: #61dafb;
+.header {
+    background-color: #23B5D3;
+    color: #EBF2FA;
+    padding: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 7px;
+    margin-bottom: 10px;
+   
+}
+
+.search-part button {
+    margin-right: 10px;
+    padding: 6px 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    background-color: #23B5D3;
+    color: #F7F7FF;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-part button:hover {
+    background-color: #75ABBC;
+     
+}
+
+.search-part button:focus {
+    outline-color: #23B5D3;
+    background-color: #75ABBC;
+}
+
+.search-part input {
+    font-size: 16px;
+    padding: 5px;
+    color: #050609;
+    background-color: #F7F7FF;
+    border: 1px solid #23B5D3;
+}
+
+.search-part input:focus {
+    outline-color: #23B5D3;
+}
+
+.top-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
