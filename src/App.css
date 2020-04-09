@@ -28,7 +28,7 @@
     flex-direction: column;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin: 5px; 
-    width: 555px;
+    width: 515px;
     padding: 10px;
     background-color: white;
     color: #050609;
@@ -76,6 +76,7 @@
     color: #050609;
     background-color: #F7F7FF;
     border: 1px solid #23B5D3;
+    color: #23B5D3;
 }
 
 .search-part input:focus {
@@ -87,3 +88,41 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.left-part {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nutrients-table {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nutrient {
+    padding: 3px;
+    background-color: #23B5D3;
+    color: #F7F7FF;
+    margin: 2px
+}
+
+.item-title {
+    margin: 15px 0px 0px 0px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #23B5D3;
+    text-transform: capitalize;
+    padding: 3px;
+}
+
+.energy {
+    padding: 3px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    background-color: #75ABBC;
+    color: #F7F7FF;
+
+}
+
+
