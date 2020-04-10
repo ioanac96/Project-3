@@ -51,13 +51,13 @@
 
 .search-part button {
     margin-right: 10px;
-    padding: 6px 10px;
+    padding: 10px 10px;
     font-size: 16px;
     border-radius: 4px;
     background-color: #23B5D3;
     color: #F7F7FF;
-    padding: 10px;
     cursor: pointer;
+    font-weight: bold;
 }
 
 .search-part button:hover {
@@ -125,4 +125,32 @@
 
 }
 
+.add button {
+    float: right;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    background-color: #23B5D3;
+    color: #F7F7FF;
+    cursor: pointer;
+    font-weight: bold;
+}
 
+.add button:focus {
+    outline-color: #23B5D3;
+    background-color: #75ABBC;
+}
+
+.add button:hover {
+    background-color: #75ABBC;
+}
+
+.user-energy {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding: 7px;
+    background-color: #23B5D3;
+    color: #F7F7FF;
+    font-weight: bold;
+    border-radius: 10px;
+}

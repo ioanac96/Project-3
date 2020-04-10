@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
+import Item from './Item.js'
 import { searchRequest, nutrientsRequest } from './requests';
 
-const essentials = ["Protein", "Total lipid (fat)", "Carbohydrate, by difference", "Water", "Calcium, Ca", "Iron, Fe", "Magnesium, Mg", "Sugars, total"];
+
 
 class App extends React.Component {
   constructor(props) {
@@ -11,12 +12,31 @@ class App extends React.Component {
     this.state = {
       items: [],
       searchInputValue: '',
-      nutrients: []
+      nutrients: [], 
+      userItems: [],
+      userEnergyKcal: 0,
+      userEnergyKJ: 0,
+      clickedAdd: false
     };
 
     this.onChangeSearch = this.onChangeSearch.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.onAdd = this.onAdd.bind(this);
   }
+
+  onAdd(currentItem, energyKcal, energyKJ) {
+    const array = Object.assign([], this.state.userItems);
+    array.push(currentItem);
+    var sumKcal = ((Number.parseFloat(energyKcal,10)).toFixed(2))*1 + this.state.userEnergyKcal; 
+    var sumKJ = parseFloat(energyKJ,10) + this.state.userEnergyKJ;
+    this.setState({
+      userItems: array,
+      userEnergyKcal: sumKcal,
+      userEnergyKJ: sumKJ,
+      clickedAdd: true
+    });
+    }
+    
 
   onChangeSearch(event) {
     this.setState({
@@ -43,10 +63,8 @@ class App extends React.Component {
     });
   }
 
-  render() {
-    console.log("Iteeems:",this.state.items);
-    
-    const {items, nutrients} = this.state;
+  render() {  
+    const {items, nutrients, userEnergyKJ, userEnergyKcal, clickedAdd} = this.state;
     return (
       <div className="page">
         <div className="header">
@@ -60,74 +78,19 @@ class App extends React.Component {
           (items.length > 0)? 
           <div className="outside">
             <div className="container-for-items"> 
+            <div className="container-for-modal">
+              {
+                (clickedAdd === true) ? <div className="user-energy">You consumed {userEnergyKcal} Kcal/{userEnergyKJ} kJ today!</div> : null
+              } 
+            </div>
             {
               items.map((currentItem) => (
-                  <Item currentItem={currentItem} nutrients={nutrients} />
+                  <Item  currentItem={currentItem} nutrients={nutrients} onAdd={this.onAdd}/>
               ))
             }
             </div>
             </div> : null   
           }
-      </div>
-    );
-  }
-}
-
-class Item extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
-
-  generateObject(name, quantity, unit) {
-    return {
-      name: name,
-      quantity: quantity,
-      unit: unit
-    };
-  }
-
-
-  render() {
-    
-    const {currentItem, nutrients} = this.props;
-    const nutrientsList = currentItem.full_nutrients.map((currentNutrient) => {
-      const foundNutrient = nutrients.find(nutrient => (nutrient.attr_id === currentNutrient.attr_id && currentNutrient.value !== 0));
-      if(foundNutrient === undefined) return null;
-      return this.generateObject(foundNutrient.usda_nutr_desc, currentNutrient.value, foundNutrient.unit);
-    }).filter(nutrient => nutrient !== null);
-
-    const energyKcal = nutrientsList.find(nutrient => (nutrient.name === "Energy" && nutrient.unit === "kcal"));
-    const energyKJ = nutrientsList.find(nutrient => (nutrient.name === "Energy" && nutrient.unit === "kJ"));
-    const newNutrientsList = nutrientsList.filter( nutrient => nutrient.name !== "Energy");
-    const essentialNutrients = newNutrientsList.filter(nutrient => essentials.indexOf(nutrient.name) !== -1);
-    
-
-
-    return (
-      <div className="single-item">
-        <div className="top-part">
-          <div className="left-part">
-            <div className="item-title">{this.props.currentItem.food_name}</div>
-            <div className="energy">Energy:{energyKcal.quantity} {energyKcal.unit}/{energyKJ.quantity} {energyKJ.unit}</div>
-          </div>
-          <img alt="item" src={this.props.currentItem.photo.thumb} /> 
-        </div>
-        <div className= "nutrients-table">
-        {
-            essentialNutrients.map((currentItem) => (
-              <table className="nutrient">
-                <tbody>
-                  <tr>
-                    <td>{currentItem.name}: </td>
-                    <td>{currentItem.quantity}</td>
-                    <td>{currentItem.unit}</td>
-                  </tr>
-                </tbody>
-              </table>
-            ))
-          }
-        </div>
       </div>
     );
   }
