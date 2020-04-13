@@ -45,7 +45,7 @@ class Item extends React.Component {
         const essentialNutrients = newNutrientsList.filter(nutrient => essentials.indexOf(nutrient.name) !== -1);
         
         return (
-        <div id ={currentItem.tag_id} className="single-item">
+        <div className="single-item">
             <div className="top-part">
                 <div className="left-part">
                     <div className="item-title">{this.props.currentItem.food_name}</div>
@@ -61,8 +61,8 @@ class Item extends React.Component {
             </div>
             <div className= "nutrients-table">
             {
-                essentialNutrients.map((currentItem) => (
-                <table className="nutrient">
+                essentialNutrients.map((currentItem,index) => (
+                <table  key={`${currentItem.tag_id}${index}`} className="nutrient">
                     <tbody>
                     <tr>
                         <td>{currentItem.name}: </td>
@@ -77,7 +77,7 @@ class Item extends React.Component {
             <div className="add">
                 <input className="add-input" type="text" value={this.state.value} onChange={this.onChangeQuantity} />
                 <div className="add-unit">x 100g/ml</div>
-                <button πponClick={()=> {
+                <button onClick={()=> {
                     (energyKJ !== undefined) ? this.props.onAdd(currentItem, energyKcal.quantity, energyKJ.quantity,this.state.value): this.props.onAdd(currentItem, energyKcal.quantity, 0,this.state.value)}}>Add</button>
             </div>
             

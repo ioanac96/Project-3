@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.less';
 import Item from './Item.js'
 import { searchRequest, nutrientsRequest } from './requests';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -91,7 +91,8 @@ class App extends React.Component {
   }
 
   render() {  
-    const {searchInputValue, items, nutrients, userEnergyKJ, userEnergyKcal, clickedAdd, userItems} = this.state;
+    const {searchInputValue, items, nutrients, userEnergyKJ, userEnergyKcal, userItems} = this.state;
+    console.log("lalalal",items);
     return (
       <div className="page">
         <div className="header">
@@ -129,8 +130,8 @@ class App extends React.Component {
               } 
             </div>
             {
-              items.map((currentItem) => (
-                  <Item  currentItem={currentItem} nutrients={nutrients} onAdd={this.onAdd}/>
+              items.map((currentItem, index) => (
+                  <Item key={`${items.tag_id}${index}`} currentItem={currentItem} nutrients={nutrients} onAdd={this.onAdd}/>
               ))
             }
             </div>
