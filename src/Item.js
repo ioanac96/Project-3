@@ -6,6 +6,12 @@ class Item extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            inputValues: [],
+            value: "1"
+        }
+
+        this.onChangeQuantity = this.onChangeQuantity.bind(this);
     }
 
     generateObject(name, quantity, unit) {
@@ -15,6 +21,15 @@ class Item extends React.Component {
         unit: unit
         };
     }
+
+    onChangeQuantity(event) {
+        const inputs = Object.assign([], this.state.inputValues);
+        inputs.push(event.target.value);
+        this.setState({
+          inputValues: inputs,
+          value: event.target.value
+        });
+      }
 
     render() { 
         const {currentItem, nutrients} = this.props;
@@ -28,8 +43,6 @@ class Item extends React.Component {
         const energyKJ = nutrientsList.find(nutrient => (nutrient.name === "Energy" && nutrient.unit === "kJ"));
         const newNutrientsList = nutrientsList.filter( nutrient => nutrient.name !== "Energy");
         const essentialNutrients = newNutrientsList.filter(nutrient => essentials.indexOf(nutrient.name) !== -1);
-        console.log("KJ",energyKJ);
-        console.log("Kcal",energyKcal);
         
         return (
         <div id ={currentItem.tag_id} className="single-item">
@@ -62,8 +75,12 @@ class Item extends React.Component {
             }
             </div>
             <div className="add">
-            <button onClick={()=> {this.props.onAdd(currentItem, energyKcal.quantity, energyKJ.quantity)}}>Add</button>
+                <input className="add-input" type="text" value={this.state.value} onChange={this.onChangeQuantity} />
+                <div className="add-unit">x 100g/ml</div>
+                <button πponClick={()=> {
+                    (energyKJ !== undefined) ? this.props.onAdd(currentItem, energyKcal.quantity, energyKJ.quantity,this.state.value): this.props.onAdd(currentItem, energyKcal.quantity, 0,this.state.value)}}>Add</button>
             </div>
+            
         </div>
         );
     }
