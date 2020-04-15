@@ -1,0 +1,101 @@
+@import "./variables.less";
+
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+.single-item {
+    .top-part {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .left-part {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .item-title {
+                margin: 15px 0px 0px 0px;
+                font-size: 20px;
+                font-weight: bold;
+                color: @main-blue;
+                text-transform: capitalize;
+                padding: 3px;
+            }
+
+            .energy {
+                padding: 3px;
+                margin-bottom: 5px;
+                font-weight: bold;
+                background-color: @secondary-blue;
+                color: @bright-color;
+            
+            }
+        }
+    }
+
+    .nutrients-table {
+        display: flex;
+        flex-wrap: wrap;
+
+        .nutrient {
+            padding: 3px;
+            background-color: @main-blue;
+            color: @bright-color;
+            margin: 2px
+        }     
+    }
+}
+
+
+
+
+.add {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    .add-input {
+        border: 1px solid @main-blue;
+        color: @main-blue;
+        font-size: 12px;
+        max-width: 35px;
+        padding: 5px;
+        font-weight: bold;
+    
+        &:focus {
+            outline-color: @main-blue;
+        }
+    }  
+    
+    .add-unit {
+        font-size: 14px;
+        margin: 0px 5px 0px 5px;
+        color: @main-blue;
+        font-weight: bold;
+        padding-top: 5px;
+    }
+
+    button {
+        padding: 5px 10px;
+        font-size: 14px;
+        border-radius: 4px;
+        background-color: @main-blue;
+        color: @bright-color;
+        cursor: pointer;
+        font-weight: bold;
+
+        &:hover {
+            background-color: @secondary-blue;
+        }
+
+        &:focus {
+            outline-color: @main-blue;
+            background-color: @secondary-blue;
+        }
+    }
+}
+
+

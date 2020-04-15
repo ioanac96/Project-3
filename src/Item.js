@@ -1,4 +1,5 @@
 import React from 'react';
+import './Item.less';
 
 const essentials = ["Protein", "Total lipid (fat)", "Carbohydrate, by difference", "Water", "Calcium, Ca", "Iron, Fe", "Magnesium, Mg", "Sugars, total"];
 
