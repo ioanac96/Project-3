@@ -13,7 +13,35 @@
     .header {
         background-color: @main-blue;
         color: @second-bright-color;
-        padding: 10px;
+        height: 38px;
+
+        .header-title {
+            float: left;
+            font-size: 23px;
+            font-weight: bold;
+            padding: 7px;
+        }
+
+        .header-link {
+            float: right;
+            padding: 10px;
+            text-decoration: none;
+            color: @bright-color;
+            font-weight: bold;
+
+            &:hover {
+                background-color: @second-bright-color;
+                color: @main-blue;
+                opacity: 0.6;
+            }
+
+            &.active {
+                background-color: @second-bright-color;
+                color: @main-blue;
+                opacity: 0.6;
+            }
+
+        }
     }
 
     .search-part {
@@ -146,7 +174,7 @@
                 }
             }
         }
-    } 
+    }
 }
 
 

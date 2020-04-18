@@ -1,14 +1,49 @@
 @import "./variables.less";
 
-.container-for-user-details {
+
+.container-for-details-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
+    justify-content: center;
 
-    .css-g1d714-ValueContainer {
-        width: 180px;
-    }
+    .container-for-user-details {
+        display: flex;
+        flex-wrap: wrap;
+        width: 305px;
+        margin-top: 7px;
+        border: 1px solid @main-blue;
+        padding: 4px ;
+    
+        .css-g1d714-ValueContainer {
+            width: 180px;
+        }
+    
+        .my-profile-input {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
 
+            label {
+                margin-bottom: 5px;
+                background-color: @main-blue;
+                color: @bright-color;
+                width: 89px;
+                padding: 3px;
+                
+            }
+
+            input {
+                margin-bottom: 5px;
+                padding-left: 14px;
+                font-size: 14px;
+                width: 54px;
+                color: @main-blue;
+                border: 1px solid @main-blue;
+            }
+        }
+
+        .select-input {
+            margin-bottom: 5px;
+        }
+    
+    }    
 }

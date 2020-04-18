@@ -129,36 +129,37 @@ class MyProfile extends React.Component {
 
     render() {
         const {weight, height, age, gender, BMR, userWish, calories, message} = this.state;
-        console.log("aici",this.state);
         return (
             <div>
-                <Header />
-                <div className="container-for-user-details">
-                    <div>
-                        <label>Weight(kg):</label>
-                        <input type='number' value={weight} onChange={this.onChangeInput('weight')} />
+                <Header path={this.props.match.path}/>
+                <div className="container-for-details-container">
+                    <div className="container-for-user-details">
+                        <div className="my-profile-input">
+                            <label>Weight(kg):</label>
+                            <input type='number' value={weight} onChange={this.onChangeInput('weight')} />
+                        </div>
+                        <div className="my-profile-input">
+                            <label>Height(cm):</label>
+                            <input type='number' value={height} onChange={this.onChangeInput('height')}/>
+                        </div>
+                        <div className="my-profile-input">
+                            <label>Age(years):</label>
+                            <input type='number' value={age} onChange={this.onChangeInput('age')}/>
+                        </div>
+                        <div className="select-input">
+                            <Select value={gender} options={optionsGender} onChange={this.onChange('gender')} placeholder="Select gender" />
+                        </div>
+                        <div className="select-input">
+                        <Select value={BMR} options={optionsBMR} onChange={this.onChange('BMR')} placeholder="How active are you?" />
+                        </div>
+                        <div className="select-input">
+                        <Select value={userWish} options={optionsUserWish} onChange={this.onChange('userWish')} placeholder="What do you want to do?" />
+                        </div>
+                        <button onClick={this.onClickCalculate}>Calculate</button>
+                        {
+                            (calories !== 0) ? <div>{message}</div> : null
+                        }
                     </div>
-                    <div>
-                        <label>Height(cm):</label>
-                        <input type='number' value={height} onChange={this.onChangeInput('height')}/>
-                    </div>
-                    <div>
-                        <label>Age(years):</label>
-                        <input type='number' value={age} onChange={this.onChangeInput('age')}/>
-                    </div>
-                    <div>
-                        <Select value={gender} options={optionsGender} onChange={this.onChange('gender')} placeholder="Select gender" />
-                    </div>
-                    <div>
-                    <Select value={BMR} options={optionsBMR} onChange={this.onChange('BMR')} placeholder="How active are you?" />
-                    </div>
-                    <div>
-                    <Select value={userWish} options={optionsUserWish} onChange={this.onChange('userWish')} placeholder="What do you want to do?" />
-                    </div>
-                    <button onClick={this.onClickCalculate}>Calculate</button>
-                    {
-                        (calories !== 0) ? <div>{message}</div> : null
-                    }
                 </div>
             </div>
         )

@@ -101,7 +101,7 @@ class Home extends React.Component {
         const {searchInputValue, items, nutrients, userEnergyKJ, userEnergyKcal, userItems, showMore} = this.state;
         return(
             <div>
-                <Header />
+                <Header path={this.props.match.path} />
                 <div className="search-part">
                     <button onClick={this.onSearch}>Search</button>
                     <input value={searchInputValue} onChange={this.onChangeSearch} />
