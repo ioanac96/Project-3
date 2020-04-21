@@ -6,44 +6,214 @@
     justify-content: center;
 
     .container-for-user-details {
-        display: flex;
-        flex-wrap: wrap;
-        width: 305px;
-        margin-top: 7px;
-        border: 1px solid @main-blue;
-        padding: 4px ;
-    
-        .css-g1d714-ValueContainer {
-            width: 180px;
+        width: 452px;
+        margin-top: 50px;
+        padding: 4px;
+        box-shadow: 4px 4px 23px -9px rgba(0, 0, 0, 0.75);
+
+        .title-for-user-calculator {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: @main-blue;
+            margin: 10px;
+            text-transform: uppercase;
         }
     
-        .my-profile-input {
+        .normal-inputs {
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+            flex-wrap: wrap;
 
-            label {
+            .my-profile-input {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+    
+                &.weight {
+                    margin-right: 5px;
+                }
+    
+                &.height {
+                    margin-right: 5px;
+                }
+    
+                label {
+                    margin-bottom: 5px;
+                    background-color: @main-blue;
+                    color: @bright-color;
+                    width: 89px;
+                    padding: 3px 3px 3px 3px;
+                    height: 22px;
+                    
+                }
+    
+                input {
+                    margin-bottom: 5px;
+                    padding-left: 14px;
+                    font-size: 14px;
+                    width: 54px;
+                    color: @main-blue;
+                    border: 1px solid @main-blue;
+                    height: 22px; 
+                    
+                    &:focus {
+                        outline: none;
+                    }
+                }
+    
+            }
+        }
+
+        .select {
+            display: flex;
+            flex-wrap: wrap;
+
+            .select-input {
                 margin-bottom: 5px;
-                background-color: @main-blue;
-                color: @bright-color;
-                width: 89px;
+                margin-right: 5px;
+
+            }
+
+            .bmr {
+                margin-left: 4px;
+            }
+
+            .prefix__value-container {
+                width: 176px;
+                font-size: 16px;
                 padding: 3px;
+             
+                .prefix__single-value {
+                    color: @main-blue;
+                }
                 
-            }
 
-            input {
-                margin-bottom: 5px;
-                padding-left: 14px;
-                font-size: 14px;
-                width: 54px;
-                color: @main-blue;
+                .prefix__placeholder {
+                    color: @main-blue;
+                    font-size: 16px;
+                }
+            }
+    
+    
+            .prefix__control {
+                border-radius: 0px;
+                background-color: @bright-color;
                 border: 1px solid @main-blue;
+                box-shadow: none;
+                &:focus {
+                    outline-color: @main-blue;
+                }
             }
+
+            .prefix__control--is-focused {
+                border-color: none;
+                box-shadow: none;
+
+                &:focus {
+                    outline-color: @main-blue;
+                }
+            }
+
+            .prefix__control--menu-is-open{
+                border-color: none;
+                box-shadow: none;
+                &:focus {
+                    outline-color: @main-blue;
+                }
+            }
+    
+            .prefix__indicators {
+                .prefix__indicator-separator {
+                    background-color: @main-blue;
+                    margin: 0px;
+                }
+    
+                .prefix__indicator {
+                    background-color: @main-blue;
+                    cursor: pointer;
+
+    
+                    .css-6q0nyr-Svg {
+                        color: @bright-color;
+                    }
+                }
+
+                .prefix__dropdown-indicator {
+                    background-color: @main-blue;
+    
+                    .css-6q0nyr-Svg {
+                        color: @bright-color;
+                    }
+                }
+            }
+
+            .prefix__menu {
+                .prefix__menu-list {
+                    color: @main-blue;
+                    background-color: @bright-color;
+                    
+                    .prefix__option {
+
+                        &:hover {
+                            background-color: @main-blue;
+                            color: @bright-color;
+                        }
+
+                        &:active {
+                            background-color: @main-blue;
+                            color: @bright-color;
+                        }
+
+                        &:focus {
+                            background-color: @main-blue;
+                            color: @bright-color;
+                        }
+
+                    }
+
+                    .prefix__option--is-focused {
+                        background-color: @main-blue;
+                        color: @bright-color;
+                    }
+
+                    .prefix__option--is-selected  {
+                        background-color: @main-blue;
+                        color: @bright-color;
+                        opacity: 0.4;
+                    }
+                }
+            }
+    
         }
 
-        .select-input {
-            margin-bottom: 5px;
+        .calculate-button {
+            padding: 5px;
+            font-size: 14px;
+            border-radius: 4px;
+            background-color: @main-blue;
+            color: @bright-color;
+            cursor: pointer;
+            font-weight: bold;
+            float: right;
+            margin-right: 4px;
+    
+            &:hover {
+                background-color: @secondary-blue;
+            }
+    
+            &:focus {
+                outline-color: @main-blue;
+                background-color: @secondary-blue;
+            }
+
         }
+
+        .message {
+            color: @main-blue;
+            font-size: 16px;
+            padding-top: 6px;
+        }
+        
     
     }    
 }

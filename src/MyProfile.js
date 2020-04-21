@@ -55,21 +55,25 @@ const optionsUserWish = [
 class MyProfile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            userDetail: {},
-            weight: 0,
-            height: 0,
-            age: 18,
-            gender: '',
-            BMR: 1.2,
-            userWish: '',
-            message: '',
-            calories: 0
-        };
-        
+        this.state = JSON.parse(localStorage.getItem('userInfo'));
+
         this.onChange = this.onChange.bind(this);
         this.onClickCalculate = this.onClickCalculate.bind(this);
+        this.onSave = this.onSave.bind(this);
     
+    }
+
+    generateObject(weight, height, age, gender, BMR,  userWish, message, calories) {
+        return {
+            weight: weight,
+            height: height,
+            age: age,
+            gender: gender,
+            BMR: BMR,
+            userWish: userWish,
+            message: message,
+            calories: calories
+        }
     }
 
     onChangeInput(inputName) {
@@ -93,36 +97,54 @@ class MyProfile extends React.Component {
         const {weight, height, age, gender, BMR, userWish} = this.state;
         let calories = 0;
         let message = '';
-        if(gender.value === 'men') {
-            calories = (10 * weight + 6.25 * height - 5 * age + 5) * BMR.value;
+        if(weight > 0 && height > 0 && age >= 18 && userWish !== '' && BMR !== 0 && gender !== ''){
+            if(gender.value === 'men') {
+                calories = (10 * weight + 6.25 * height - 5 * age + 5) * BMR.value;
+            }
+            else {
+                calories = (10 * weight + 6.25 * height - 5 * age - 161) * BMR.value;
+            }
+    
+            if(userWish.value === 'lose') {
+                calories = calories - 500;
+                if(gender.value === 'women' && calories < 1200) {
+                    message = `You need ${calories}/per day to lose 0.5kg in a week, but it is not safe to lose weight!`;
+                }
+                else if(gender.value === 'men' && calories < 1800) {
+                    message = `You need ${calories}/per day to lose 0.5kg in a week, but it is not safe to lose weight!`;
+                }
+                else message = `You need ${calories}/per day to lose 0.5kg in a week.`;
+            }
+    
+            if(userWish.value === 'gain') {
+                calories = calories + 500;
+                message = `You need ${calories}/per day to gain 0.5kg in a week.`;
+            }
+             if(userWish.value === 'maintain') {
+                message = `You need ${calories}/per day to maintain your weight.`;
+            }
+    
+            this.setState({
+                calories: calories,
+                message: message
+            });
         }
         else {
-            calories = (10 * weight + 6.25 * height - 5 * age - 161) * BMR.value;
+            message = 'Please complete all the spaces and choose your options!';
+            this.setState({
+                message: message
+            });
         }
+        
+        
+    }
 
-        if(userWish.value === 'lose') {
-            calories = calories - 500;
-            if(gender.value === 'women' && calories < 1200) {
-                message = `You need ${calories}/per day to lose 0.5kg in a week, but it is not safe to lose weight!`;
-            }
-            else if(gender.value === 'men' && calories < 1800) {
-                message = `You need ${calories}/per day to lose 0.5kg in a week, but it is not safe to lose weight!`;
-            }
-            else message = `You need ${calories}/per day to lose 0.5kg in a week.`;
-        }
+    onSave() {
+        const {weight, height, age, gender, BMR,  userWish, message, calories} = this.state;
+        const newObject = this.generateObject(weight, height, age, gender, BMR,  userWish, message, calories);
+        localStorage.setItem('userInfo',JSON.stringify(newObject));
 
-        if(userWish.value === 'gain') {
-            calories = calories + 500;
-            message = `You need ${calories}/per day to gain 0.5kg in a week.`;
-        }
-         if(userWish.value === 'maintain') {
-            message = `You need ${calories}/per day to maintain your weight.`;
-        }
-
-        this.setState({
-            calories: calories,
-            message: message
-        });
+        this.onClickCalculate();
     }
 
 
@@ -134,30 +156,36 @@ class MyProfile extends React.Component {
                 <Header path={this.props.match.path}/>
                 <div className="container-for-details-container">
                     <div className="container-for-user-details">
-                        <div className="my-profile-input">
-                            <label>Weight(kg):</label>
-                            <input type='number' value={weight} onChange={this.onChangeInput('weight')} />
+                        <div className="title-for-user-calculator">Find your energy needs</div>
+                        <div className="normal-inputs">
+                            <div className="my-profile-input weight">
+                                <label>Weight(kg):</label>
+                                <input type='number' value={weight} onChange={this.onChangeInput('weight')} />
+                            </div>
+                            <div className="my-profile-input height">
+                                <label>Height(cm):</label>
+                                <input type='number' value={height} onChange={this.onChangeInput('height')}/>
+                            </div>
+                            <div className="my-profile-input">
+                                <label>Age(years):</label>
+                                <input type='number' value={age} onChange={this.onChangeInput('age')}/>
+                            </div>
                         </div>
-                        <div className="my-profile-input">
-                            <label>Height(cm):</label>
-                            <input type='number' value={height} onChange={this.onChangeInput('height')}/>
+                        <div className="select">
+                            <div className="select-input">
+                                <Select classNamePrefix="prefix" value={gender} options={optionsGender} onChange={this.onChange('gender')} placeholder="Select gender" />
+                            </div>
+                            <div className="select-input bmr">
+                            <Select classNamePrefix="prefix" value={BMR} options={optionsBMR} onChange={this.onChange('BMR')} placeholder="How active are you?" />
+                            </div>
+                            <div className="select-input" >
+                            <Select classNamePrefix="prefix" value={userWish} options={optionsUserWish} onChange={this.onChange('userWish')} placeholder="What do you want to do?" />
+                            </div>
                         </div>
-                        <div className="my-profile-input">
-                            <label>Age(years):</label>
-                            <input type='number' value={age} onChange={this.onChangeInput('age')}/>
-                        </div>
-                        <div className="select-input">
-                            <Select value={gender} options={optionsGender} onChange={this.onChange('gender')} placeholder="Select gender" />
-                        </div>
-                        <div className="select-input">
-                        <Select value={BMR} options={optionsBMR} onChange={this.onChange('BMR')} placeholder="How active are you?" />
-                        </div>
-                        <div className="select-input">
-                        <Select value={userWish} options={optionsUserWish} onChange={this.onChange('userWish')} placeholder="What do you want to do?" />
-                        </div>
-                        <button onClick={this.onClickCalculate}>Calculate</button>
+                        <button className="calculate-button" onClick={this.onSave}>Save</button>
+                        <button  className="calculate-button" onClick={this.onClickCalculate}>Calculate</button>
                         {
-                            (calories !== 0) ? <div>{message}</div> : null
+                            (calories !== 0 || message !=='') ? <div className="message">{message}</div> : null
                         }
                     </div>
                 </div>
